@@ -37,17 +37,19 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -204,6 +206,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="recipes/DLCMethods.html">
    How to write a DLC Methods Section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recipes/OpenVINO.html">
+   Intel OpenVINO backend
   </a>
  </li>
 </ul>
@@ -428,7 +435,7 @@ Note that this will <em>not</em> disprupt or install Tensorflow, or any other De
 <p>With <code class="docutils literal notranslate"><span class="pre">deeplabcut-docker</span></code>, you can use the images in three modes.</p>
 <ul class="simple">
 <li><p><em>Note 1: When running any of the following commands first, it can take some time to complete (a few minutes, depending on your internet connection), since it downloads the Docker image in the background. If you do not see any errors in your terminal, assume that everything is working fine! Subsequent runs of the command will be faster.</em></p></li>
-<li><p><em>Note 2: The Terminal mode image can be used on all supported plattforms (Linux and MacOS). The GUI images can only be considered stable on Linux systems as of DeepLabCut 2.2.0.2 and need additional configuration on Mac.</em></p></li>
+<li><p><em>Note 2: The Terminal mode image can be used on all supported platforms (Linux and MacOS). The GUI images can only be considered stable on Linux systems as of DeepLabCut 2.2.0.2 and need additional configuration on Mac.</em></p></li>
 <li><p><em>Note 3: For any mode below, you might want to set which directory is the base, namely, so you can have read/write (or ready only access). Here is how to do so:
 If you want to mount the whole directory could e.g., pass</em></p></li>
 </ul>

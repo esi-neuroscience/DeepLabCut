@@ -37,17 +37,19 @@
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -204,6 +206,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="DLCMethods.html">
    How to write a DLC Methods Section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="OpenVINO.html">
+   Intel OpenVINO backend
   </a>
  </li>
 </ul>
@@ -502,7 +509,7 @@ You can look at what types of augmentation are available to you (or edit those f
 <hr class="docutils" />
 <div class="section" id="resnets">
 <h2>ResNets:<a class="headerlink" href="#resnets" title="Permalink to this headline">¶</a></h2>
-<p>In Mathis et al. 2018 we benchmarked three networks: <strong>ResNet-50, ResNet-101, and ResNet-101ws</strong>. For ALL lab applications, ResNet-50 was enough. For all the demo videos on <a class="reference external" href="http://www.mousemotorlab.org/deeplabcut">www.deeplabcut.org</a> the backbones are ResNet-50’s. Thus, we recommend making this your go-to workhorse for data analysis. Here is a figure from the paper, see panel “B” (they are all within a few pixels of eachother on the open-field dataset):</p>
+<p>In Mathis et al. 2018 we benchmarked three networks: <strong>ResNet-50, ResNet-101, and ResNet-101ws</strong>. For ALL lab applications, ResNet-50 was enough. For all the demo videos on <a class="reference external" href="http://www.mousemotorlab.org/deeplabcut">www.deeplabcut.org</a> the backbones are ResNet-50’s. Thus, we recommend making this your go-to workhorse for data analysis. Here is a figure from the paper, see panel “B” (they are all within a few pixels of each other on the open-field dataset):</p>
 <p align="center">
 <img src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/1548558406678-S32H6T3M3U7BWVS4IGYD/ke17ZwdGBToddI8pDm48kD4CqqHoJgLzZVYacqX5G8QUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dqTB9h4P9po3-YSCqzKkit0PccqviqYX7RTAdOBUgXwbCjLISwBs8eEdxAxTptZAUg/SupplFig2-01.png?format=1000w" width="80%">
 </p>

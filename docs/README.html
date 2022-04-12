@@ -37,17 +37,19 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -204,6 +206,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="recipes/DLCMethods.html">
    How to write a DLC Methods Section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recipes/OpenVINO.html">
+   Intel OpenVINO backend
   </a>
  </li>
 </ul>
@@ -363,19 +370,23 @@
 </ul>
 <div class="section" id="more-resources-for-help-additional-docs-and-roadmap-of-the-project">
 <h2>More resources for help, additional docs, and roadmap of the project!<a class="headerlink" href="#more-resources-for-help-additional-docs-and-roadmap-of-the-project" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://view.genial.ly/5fb40a49f8a0ef13943d4e5e/horizontal-infographic-review-learning-to-use-deeplabcut">CLICK to lauch an interactive graphic that walks you through more resources!</a> (mini preview below)</p>
+<p><a class="reference external" href="https://view.genial.ly/5fb40a49f8a0ef13943d4e5e/horizontal-infographic-review-learning-to-use-deeplabcut">CLICK to launch an interactive graphic that walks you through more resources!</a> (mini preview below)</p>
 <p align="left">
 <img src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/1605642639913-OIUBVR8R0JLYZQPRIYIR/ke17ZwdGBToddI8pDm48kMMAxEenKbh651VJujierMxZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpw-CO5bsXt3Lwn3O5kv-PfTgGtLU9oye8D4J7Fixq38Gl-o9tfrEtbnqpPzC5bXTas/ezgif.com-gif-maker.gif?format=750w" width="95%">
 </p>
 <ul class="simple">
+<li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut-live">Real-time feedback with DeepLabCut: DeepLabCut-live</a></p></li>
 <li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/blob/master/docs/Overviewof3D.md">DeepLabCut 3D</a></p></li>
 <li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/blob/master/docs/HelperFunctions.md">Helper functions</a></p></li>
 <li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/blob/master/docs/roadmap.md">Developer Road Map!</a></p></li>
-<li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/master/blob/CONTRIBUTING.md">How to Contribute to DeepLabCut</a> and the <a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/blob/CODE_OF_CONDUCT.md">Code of Conduct</a></p></li>
-<li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/master/blob/AUTHORS">The Authors of DeepLabCut</a></p></li>
+<li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/blob/master/CONTRIBUTING.md">How to Contribute to DeepLabCut</a> and the <a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a></p></li>
+<li><p><a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/blob/master/AUTHORS">The Authors of DeepLabCut</a></p></li>
 </ul>
 <p>A quick video to help you navigate the docs:  <strong>Click on the image!</strong></p>
 <p><a class="reference external" href="https://www.youtube.com/watch?v=A9qZidI7tL8"><img alt="Watch the video" src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/1582931103893-0YCXSXAKJR218B101W38/ke17ZwdGBToddI8pDm48kJ1KQcuvke5FTEGELkUtJ-tZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIrueQmuW2z7_VjRAJlsMCy1JrSO6-zKAUtz5k3N9334U/learningpanel+%284%29.png?format=1000w" /></a></p>
+<ul class="simple">
+<li><p>Please note: what we cannot do is provided support or help designing your experiments and data analysis. The number of requests for this is too great to sustain in our inbox. We are happy to answer such questions in the forum as a community, in a scalable way. We hope and believe we have given enough tools and resources to get started and to accelerate your research program, and this is backed by the &gt;700 citations using DLC, 2 clinical trials by others, and countless applications. Thus, we believe this code works, is accessible, and with limited programming knowledge can be used. Please read our Missions &amp; Values statement to learn more about what we DO hope to provide you.</p></li>
+</ul>
 </div>
 </div>
 

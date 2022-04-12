@@ -37,17 +37,19 @@
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -204,6 +206,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="DLCMethods.html">
    How to write a DLC Methods Section
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="OpenVINO.html">
+   Intel OpenVINO backend
   </a>
  </li>
 </ul>
@@ -377,6 +384,11 @@
    How to confirm that your GPU is being used by DeepLabCut
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-install-deeplabcut-for-intel-and-amd-gpus-on-windows">
+   How to install DeepLabCut for Intel and  AMD GPUs on Windows
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -461,6 +473,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to-confirm-that-your-gpu-is-being-used-by-deeplabcut">
    How to confirm that your GPU is being used by DeepLabCut
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-install-deeplabcut-for-intel-and-amd-gpus-on-windows">
+   How to install DeepLabCut for Intel and  AMD GPUs on Windows
   </a>
  </li>
 </ul>
@@ -752,13 +769,29 @@ For more examples and ideas, visit:
 <p>During training and analysis steps, DeepLabCut does not use the GPU processor heavily. To confirm that DeepLabCut is properly using your GPU:</p>
 <p><strong>On Windows</strong>:</p>
 <p>(1) Open the task manager. If it looks like the image below, click on “More Details”</p>
-<img src="https://github.com/backyardbiomech/docImages/blob/main/DeepLabCut/taskManager.png" width="50%">
+<p><img alt="" src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/a0db3157-2228-4444-8084-36801659f272/installBrandon1.png?format=500w" /></p>
 <p>(2) That will bring up the following, which still isn’t helpful and has caused confusion for users. The %GPU does not reflect DeepLabCut usage.</p>
-<img src="https://github.com/backyardbiomech/docImages/blob/main/DeepLabCut/TaskManagerDetails.png" width="50%">
+<p><img alt="" src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/117e3573-60bb-4599-b00b-c75276b24173/installBrandon2.png?format=500w" /></p>
 <p>(3) Click on the <strong>Performance</strong> tab. On that page, click on the small arrow under GPU (it might start as <strong>3D</strong>, and change it to <strong>CUDA</strong>.</p>
 <p>(4) During training, you should see the <strong>Dedicated GPU memory usage</strong> increase to near maximum, and you should see some activity in the <strong>CUDA</strong> graph. The graph below is the activity while running <code class="docutils literal notranslate"><span class="pre">testscript.py</span></code>.</p>
-<img src="https://github.com/backyardbiomech/docImages/blob/main/DeepLabCut/taskManagerTraining.png" width="70%">
+<p><img alt="" src="https://images.squarespace-cdn.com/content/v1/57f6d51c9f74566f55ecf271/b1d03ca0-f8ba-4a31-a399-6e86856c81b0/installBrandon3.png?format=500w" /></p>
 <p>(5) If you don’t see activity there during training, then your GPU is likely not installed correctly for DeepLabCut. Return to the installation instructions, and be sure you installed CUDA 11+, and ran <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">cudnn</span> <span class="pre">-c</span> <span class="pre">conda-forge</span></code> after installing DeepLabCut.</p>
+</div>
+<div class="section" id="how-to-install-deeplabcut-for-intel-and-amd-gpus-on-windows">
+<h2>How to install DeepLabCut for Intel and  AMD GPUs on Windows<a class="headerlink" href="#how-to-install-deeplabcut-for-intel-and-amd-gpus-on-windows" title="Permalink to this headline">¶</a></h2>
+<p>If you are on Windows 10/11 and have a DirectX 12 compatible GPU from any vendor (AMD, Intel, or Nvidia), you utilise GPU accelleration for inference, with an installation that is consistent between devices. This method uses <a class="reference external" href="https://github.com/microsoft/tensorflow-directml">Tensorflow-directml</a> which uses DirectML instead of Cuda for ML training and inference.</p>
+<p>To check the DirectX version of your installed GPU, type in dxdiag into windows search and select the run command. In system information, the bottom item of the list shows your DirectX version. In addition to this ensure your standard GPU drivers are up-to-date. Updating drivers by any official means (Nvidia Geforce experience, AMD radeon software, direct from the vendor website) is fine.</p>
+<p>The following instructions are using conda and pip for environment management, executing within the Anaconda prompt program that was installed along with Anaconda python. The # lines are not to be typed, they are for guidance.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda create --name dlc_dml <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
+conda activate dlc_dml
+<span class="c1">#specific versions noted that are validated as of DLC 2.2.0.6, but other versions may work:</span>
+pip install <span class="s1">&#39;deeplabcut[gui]&#39;</span><span class="o">==</span><span class="m">2</span>.2.0.6
+pip install tensorflow-directml<span class="o">==</span><span class="m">1</span>.15.5
+pip install pip install <span class="nv">imageio</span><span class="o">==</span><span class="m">2</span>.9.0
+conda install <span class="nv">ffmpeg</span><span class="o">==</span><span class="m">4</span>.2.2
+</pre></div>
+</div>
+<p>Attention: Please note the order of execution of these commands are important, as pip’s dependency manager may change package versions to incorrect ones if done in the wrong version.</p>
 </div>
 </div>
 
